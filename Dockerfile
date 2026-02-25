@@ -11,7 +11,9 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.lock.txt /app/requirements.lock.txt
-RUN pip install --upgrade pip && pip install -r /app/requirements.lock.txt
+RUN pip install --upgrade pip \
+    && pip install torch==2.10.0+cpu --index-url https://download.pytorch.org/whl/cpu \
+    && pip install -r /app/requirements.lock.txt
 
 COPY . /app
 
