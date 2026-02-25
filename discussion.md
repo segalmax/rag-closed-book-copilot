@@ -147,3 +147,54 @@ Edge cases handled: empty query (text input guard), no relevant results (system 
 **What could be improved:**
 - Trafilatura converts HTML tables and code blocks to `##` headers — affects 6% of chunks (67/1,108), mostly in `zookeeper.md` and `postgresql.md`. Switching to `markdownify` would fix this.
 - 120-token average chunk size is small; merging very short sections into neighbors before chunking would reduce noise in the index.
+
+---
+
+## Deployment Map
+
+```mermaid
+%%{ init: { 'theme': 'base' } }%%
+flowchart TD
+    classDef actor    fill:#dbeafe,stroke:#3b82f6,color:#1e3a5f
+    classDef proxy    fill:#fef9c3,stroke:#ca8a04,color:#713f12
+    classDef service  fill:#dcfce7,stroke:#16a34a,color:#14532d
+    classDef storage  fill:#ede9fe,stroke:#7c3aed,color:#2e1065
+    classDef external fill:#fee2e2,stroke:#dc2626,color:#7f1d1d
+    classDef registry fill:#e0f2fe,stroke:#0284c7,color:#0c4a6e
+
+    Dev(["Developer<br/>MacBook"]):::actor
+    Browser(["User Browser"]):::actor
+    GH["GitHub<br/>segalmax/rag-closed-book-copilot"]:::registry
+    DH[("Docker Hub<br/>segalmax/rag-copilot:latest")]:::registry
+
+    subgraph EC2["EC2 t3.medium - Frankfurt"]
+        direction LR
+        Nginx["1. nginx:1.27<br/>rag_nginx :80"]:::proxy
+        App["2. rag_app<br/>Streamlit :8501"]:::service
+        Nginx -->|"proxy_pass :8501"| App
+    end
+
+    KBMount[("kb/ bind mount<br/>index.faiss + chunks")]:::storage
+    HFVol[("hf_cache volume<br/>mxbai-embed-large-v1")]:::storage
+    OpenAI(["OpenAI API<br/>gpt-4o"]):::external
+
+    Dev -->|"1. git push"| GH
+    Dev -->|"2. docker buildx push"| DH
+    Dev -->|"3. rsync kb/"| KBMount
+    GH -->|"4. git clone"| Nginx
+    DH -->|"5. docker compose pull"| App
+    Browser -->|"6. HTTP :80"| Nginx
+    App -->|"reads"| KBMount
+    App -->|"loads model"| HFVol
+    App -->|"7. LLM call"| OpenAI
+
+    subgraph LEGEND["Legend"]
+        direction LR
+        LA(["Actor"]):::actor
+        LP["Proxy"]:::proxy
+        LS["Service"]:::service
+        LR[("Registry / Storage")]:::registry
+        LSt[("Volume / Mount")]:::storage
+        LE(["External API"]):::external
+    end
+```
