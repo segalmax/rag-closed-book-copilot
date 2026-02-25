@@ -1,0 +1,69 @@
+﻿Homework: Building a Full RAG Application
+Objective
+Design and implement a complete Retrieval-Augmented Generation (RAG) web application based on a topic that genuinely interests you. This assignment evaluates your ability to design a knowledge base, implement vector retrieval using FAISS, integrate an LLM, and deliver a working web interface.
+1. Choose a Meaningful Topic
+Select a subject that is personally meaningful or professionally relevant to you.
+* Examples:
+* A hobby (sports analytics, movies, fitness, etc.)
+* A professional domain (cybersecurity, finance, cloud computing, etc.)
+* Academic research area
+* Technical documentation
+* Historical events
+* Company knowledge base simulation
+The more you care about the topic, the better your application will be.
+2. Build the Knowledge Base (Using FAISS)
+Create a knowledge base containing real and relevant data.
+* Requirements:
+* Collect real data (articles, documents, PDFs, structured text, etc.)
+* Clean and preprocess the data
+* Split the data into meaningful chunks
+* Generate embeddings
+* Store embeddings in a FAISS vector database
+* Ensure semantic retrieval is working properly
+* Deliverables:
+* Description of data source
+* Explanation of chunking strategy
+* Explanation of embedding model used
+* FAISS indexing implementation
+3. Implement the RAG Pipeline
+Build a complete RAG pipeline including:
+* User submits a question
+* Relevant documents are retrieved from FAISS
+* Retrieved context is injected into the prompt
+* LLM generates a grounded response
+Make sure:
+* The LLM answers based only on retrieved context
+* The system reduces hallucinations
+* You handle edge cases (no relevant results, empty queries, etc.)
+4. Develop a Web Application
+Create a working web application for your RAG system.
+* Requirements:
+* Clean and intuitive UI/UX aligned with your topic
+* User input field for questions
+* Display of model response
+* Display of retrieved documents (recommended)
+* Loading indicators
+* Basic error handling
+5. Validation and Testing
+You must validate that your system works correctly.
+* Test and demonstrate:
+* Accurate retrieval
+* Context-based answering
+* Behavior when irrelevant questions are asked
+* Performance with multiple queries
+* At least 5 example test questions with results
+6. Submission Requirements
+* Submit:
+* Source code (clean and documented)
+* Short architecture explanation
+* Screenshots or short demo video
+* Example queries and outputs
+* Brief reflection (what worked well, what could be improved)
+Evaluation Criteria
+* Quality of knowledge base
+* Correct FAISS implementation
+* Proper RAG pipeline integration
+* UI/UX design
+* Code quality
+* Validation and testing depth
+* Creativity and originality

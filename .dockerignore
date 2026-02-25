@@ -1,0 +1,36 @@
+# VCS and editor metadata
+.git/
+.gitignore
+.idea/
+.vscode/
+.DS_Store
+
+# Local env and virtualenv
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Large/generated local artifacts
+kb/index.faiss
+kb/index_meta.json
+kb/embed_manifest.json
+kb/processed/*.jsonl
+kb/visualizations/*.html
+kb/visualizations/*.json
+kb/visualization.html
+evaluation/last_run_retrieval.json
+evaluation/last_run_answer.json
+
+# Runtime caches
+.cache/
+hf_cache/
+torch_cache/

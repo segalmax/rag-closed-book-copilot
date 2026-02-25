@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+venv/
+
+# Secrets and local config
+.env
+.env.*
+!.env.example
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Build and cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Generated RAG artifacts
+kb/index.faiss
+kb/index_meta.json
+kb/embed_manifest.json
+kb/processed/*.jsonl
+kb/visualizations/*.html
+kb/visualizations/*.json
+kb/visualization.html
+evaluation/last_run_retrieval.json
+evaluation/last_run_answer.json
+
+# Model and framework caches
+.cache/
+hf_cache/
+torch_cache/

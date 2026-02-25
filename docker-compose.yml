@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag_app
+    restart: unless-stopped
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY?OPENAI_API_KEY is required}
+      - HF_HOME=/root/.cache/huggingface
+      - TRANSFORMERS_CACHE=/root/.cache/huggingface
+      - SENTENCE_TRANSFORMERS_HOME=/root/.cache/huggingface
+    expose:
+      - "8501"
+    volumes:
+      - ./kb:/app/kb
+      - hf_cache:/root/.cache/huggingface
+      - torch_cache:/root/.cache/torch
+
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: rag_nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    volumes:
+      - ./deploy/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  hf_cache:
+  torch_cache:
