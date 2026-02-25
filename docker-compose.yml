@@ -1,8 +1,6 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: segalmax/rag-copilot:latest
     container_name: rag_app
     restart: unless-stopped
     environment:
