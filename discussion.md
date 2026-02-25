@@ -1,8 +1,8 @@
-# RAG Application — Step 2: Knowledge Base
+# RAG Application
 
 ## Data Source
 
-System design interview prep articles scraped from [hellointerview.com](https://www.hellointerview.com/learn/system-design).  
+System design interview prep articles. 
 26 articles covering core concepts, key technologies (Redis, Kafka, PostgreSQL, etc.), and advanced topics (vector databases, etc.).  
 Each article is stored as a markdown file with YAML frontmatter (`url`, `title`, `free`, `scraped_at`) under `kb/raw/`.
 
